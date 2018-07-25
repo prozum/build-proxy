@@ -1,5 +1,6 @@
 #!/bin/env sh
 ID=$(docker run --name $1   \
+       -v /tmp:/tmp \
        -v /home/$USER:/home/$USER \
        -e USERID=$UID:$GID      \
        -it -d $2 \

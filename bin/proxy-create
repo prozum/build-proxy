@@ -1,0 +1,9 @@
+#!/bin/env sh
+ID=$(docker run --name $1   \
+       -v /home/$USER:/home/$USER \
+       -e USERID=$UID      \
+       -it -d $2 \
+       /bin/bash)
+
+echo $ID > "$(dirname $0)/../proxy.d/$1"
+ln -s "$(dirname $0)/../proxy.d/$1" "$(dirname $0)/../proxy.d/current"

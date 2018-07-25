@@ -6,4 +6,4 @@ ID=$(docker run --name $1   \
        /bin/bash)
 
 echo $ID > "$(dirname $0)/../proxy.d/$1"
-ln -s "$(dirname $0)/../proxy.d/$1" "$(dirname $0)/../proxy.d/current"
+ln -sf "$(dirname $0)/../proxy.d/$1" "$(dirname $0)/../proxy.d/current"

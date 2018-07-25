@@ -1,0 +1,2 @@
+#!/bin/env sh
+ln -sfn "$(dirname $0)/../profile.d/$1" "$(dirname $0)/../profile.d/current"

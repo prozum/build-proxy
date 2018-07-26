@@ -2,7 +2,7 @@
 ID=$(docker run --name $1   \
        -v /tmp:/tmp \
        -v /home/$USER:/home/$USER \
-       -u=$UID:$(id -g $USER)      \
+       -u=0:0      \
        -it -d $2 \
        /bin/bash)
 

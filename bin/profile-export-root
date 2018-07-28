@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+if [ "$1" == "$(basename $0)" ]; then
+  echo "You cannot export $(basename $0)!"
+  exit 1
+fi
+
+FILE="$(dirname $0)/../profile.d/current/bin/$1"
+
+echo "#!/usr/bin/env sh" > $FILE
+echo "proxy-exec-root $1 \"\$@\"" >> $FILE
+chmod +x $FILE

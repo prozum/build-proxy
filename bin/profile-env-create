@@ -1,2 +1,2 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 echo -n "-e $1=$2 " >> "$(dirname $0)/../profile.d/current/profile.env"

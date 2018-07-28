@@ -1,8 +1,23 @@
-#!/bin/env sh
-ID=$(docker run --name $1   \
+#!/usr/bin/env sh
+ID=$(docker run --name $1 \
        -v /tmp:/tmp \
+       -v /run:/run \
+       -v /etc/group:/etc/group \
+       -v /etc/passwd:/etc/passwd \
+       -v /etc/shadow:/etc/shadow \
+       -v /etc/sudoers.d:/etc/sudoers.d \
+       -v /sys/fs/cgroup:/sys/fs/cgroup \
        -v /home/$USER:/home/$USER \
-       -u=0:0      \
+       -u 0:0 \
+       -e DISPLAY \
+       --ipc host \
+       --net host \
+       --runtime nvidia \
+       --device /dev/dri \
+       --device /dev/vga_arbiter \
+       --device /dev/nvidia0 \
+       --device /dev/nvidia-modeset \
+       --privileged \
        -it -d $2 \
        /bin/bash)
 

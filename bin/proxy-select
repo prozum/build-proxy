@@ -1,2 +1,2 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 ln -sf "$(dirname $0)/../proxy.d/$1" "$(dirname $0)/../proxy.d/current"

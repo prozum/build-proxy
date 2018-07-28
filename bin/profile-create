@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 mkdir -p "$(dirname $0)/../profile.d/$1/bin"
 touch "$(dirname $0)/../profile.d/$1/profile.env"
 

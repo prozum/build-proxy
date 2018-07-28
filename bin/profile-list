@@ -1,2 +1,2 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 ls "$(dirname $0)/../profile.d"

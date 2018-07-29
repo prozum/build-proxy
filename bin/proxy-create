@@ -1,25 +1,25 @@
 #!/usr/bin/env sh
 ID=$(docker run --name $1 \
+       -itd \
        -v /tmp:/tmp \
        -v /run:/run \
-       -v /etc/group:/etc/group \
-       -v /etc/passwd:/etc/passwd \
-       -v /etc/shadow:/etc/shadow \
-       -v /etc/sudoers.d:/etc/sudoers.d \
+       -v /etc/group:/etc/group:ro \
+       -v /etc/passwd:/etc/passwd:ro \
+       -v /etc/shadow:/etc/shadow:ro \
+       -v /etc/sudoers.d:/etc/sudoers.d:ro \
        -v /sys/fs/cgroup:/sys/fs/cgroup \
        -v /home/$USER:/home/$USER \
        -u 0:0 \
        -e DISPLAY \
        --ipc host \
        --net host \
-       --runtime nvidia \
-       --device /dev/dri \
-       --device /dev/vga_arbiter \
-       --device /dev/nvidia0 \
-       --device /dev/nvidia-modeset \
        --privileged \
-       -it -d $2 \
+       --runtime nvidia \
+       -e NVIDIA_DRIVER_CAPABILITIES="${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics" \
+       -e NVIDIA_VISIBLE_DEVICES="${NVIDIA_VISIBLE_DEVICES:-all}" \
+       $2 \
        /bin/bash)
 
+mkdir -p "$(dirname $0)/../proxy.d"
 echo $ID > "$(dirname $0)/../proxy.d/$1"
 proxy-select $1

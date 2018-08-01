@@ -6,9 +6,9 @@ CMD=$1
 shift
 
 docker exec -i \
-            -u=$UID:$(id -g $USER) \
-            -w=$PWD \
-            $(cat $PROFILE/profile.env) \
-            $PROXY \
-            "$CMD" \
-            "$@"
+        -u=$(id -u $USER):$(id -g $USER) \
+        -w=$PWD \
+        $(cat $PROFILE/profile.env) \
+        $PROXY \
+        "$CMD" \
+        "$@"

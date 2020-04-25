@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 CURRENT=$(cat "$(dirname $0)/../proxy.d/current")
-docker exec -u=$(id $USER):$(id -g $USER) -it $CURRENT /bin/bash
+docker exec -w=$(pwd) -it $CURRENT /bin/bash
+#docker exec -u=$(id -u $USER):$(id -g $USER) -it $CURRENT /bin/bash

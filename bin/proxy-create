@@ -14,5 +14,5 @@ ID=$(docker run --name $1 \
 
 mkdir -p "$(dirname $0)/../proxy.d"
 echo $ID > "$(dirname $0)/../proxy.d/$1"
+docker cp /etc/passwd $ID:/etc/passwd
 proxy-select $1
-proxy-exec sed -i -e "s/\/root/\/home\/$USER/g" /etc/passwd

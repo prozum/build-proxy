@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+CURRENT=$(cat "$(dirname $0)/../proxy.d/current")
+echo $CURRENT
+docker rm $CURRENT

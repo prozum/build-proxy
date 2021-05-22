@@ -1,12 +1,14 @@
 #!/usr/bin/env sh
 PROXY=$(cat "$(dirname $0)/../proxy.d/current")
+PROFILE="$(dirname $0)/../profile.d/current"
 
 CMD=$1
 shift
 
-docker exec -it \
-        -u=$(id -u $USER):$(id -g $USER) \
+docker exec -i \
         -w=$PWD \
+        $(cat $PROFILE/profile.env) \
         $PROXY \
         "$CMD" \
         "$@"
+

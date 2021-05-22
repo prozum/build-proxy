@@ -6,19 +6,11 @@ ID=$(docker run --name $1 \
        -v /run:/run \
        -v /home/$USER:/home/$USER \
        -e DISPLAY \
+       --ipc host \
+       --net host \
+       --privileged \
        $2 \
        /bin/sh)
-#  -v /etc/group:/etc/group:ro \
-#  -v /etc/passwd:/etc/passwd:ro \
-#  -v /etc/shadow:/etc/shadow:ro \
-#  -v /etc/sudoers.d:/etc/sudoers.d:ro \
-#  -v /sys/fs/cgroup:/sys/fs/cgroup \
-#       --ipc host \
-#       --net host \
-#       --privileged \
-#       --runtime nvidia \
-#       -e NVIDIA_DRIVER_CAPABILITIES="${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics" \
-#       -e NVIDIA_VISIBLE_DEVICES="${NVIDIA_VISIBLE_DEVICES:-all}" \
 
 mkdir -p "$(dirname $0)/../proxy.d"
 echo $ID > "$(dirname $0)/../proxy.d/$1"

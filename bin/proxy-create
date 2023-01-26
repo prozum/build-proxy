@@ -5,6 +5,7 @@ ID=$(docker run --name $1 \
        -v /tmp:/tmp \
        -v /run:/run \
        -v /home/$USER:/home/$USER \
+       -v /home/$USER:/var/home/$USER \
        -e DISPLAY \
        --ipc host \
        --net host \
@@ -15,4 +16,5 @@ ID=$(docker run --name $1 \
 mkdir -p "$(dirname $0)/../proxy.d"
 echo $ID > "$(dirname $0)/../proxy.d/$1"
 docker cp /etc/passwd $ID:/etc/passwd
+docker cp /etc/group $ID:/etc/group
 proxy-select $1
